@@ -3,7 +3,7 @@
       :cols="cols.xs"
       :sm="cols.sm"
       :md="cols.md"
-      class="align-self-stretch"
+      :class="(item.card) ? 'align-self-stretch' : 'align-self-stretch pa-0'"
     >
       <template v-if="item.card">
       <v-card
@@ -11,15 +11,11 @@
         elevation="1"
         tile
       >
-        <template v-if="item.content">
         <Content :item="item" :class="$style.item" />
-        </template>
       </v-card>
       </template>
       <template v-else>
-        <template v-if="item.content">
-        <Content :item="item" />
-        </template>
+      <Content :item="item" />
       </template>
     </v-col>
 </template>

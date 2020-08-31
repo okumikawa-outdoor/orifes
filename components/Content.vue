@@ -1,9 +1,12 @@
 <template>
 <div
-  :class="[$style[imgSize], $style[font]]"
+  :class="(item.card) ? [$style[imgSize], $style[font]] : [$style[imgSize], $style[font], 'pa-3']"
   :style="(bgImg)? `background:url('${bgImg}');background-repeat: no-repeat;background-size:cover;background-position:center;height:100%;` : `background-color: ${color.bg};height:100%;`"
 >
-  <div v-html="item.content"></div>      
+  <template v-if="item.content">
+  <div v-html="item.content"></div>  
+  </template>
+  
   <template v-if="item.btnLabel && item.btnLink">
   <div class="d-flex justify-center">
     <Btn :item="item" />
