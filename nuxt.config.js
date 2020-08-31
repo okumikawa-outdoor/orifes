@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+const axios = require("axios")
 const {
   API_KEY,
   SERVICE_ID,
@@ -173,5 +174,35 @@ export default {
     path: '/sitemap.xml',
     hostname: SITE_URL,
     gzip: true
+  },
+  generate: {
+    crawler: false,
+    subFolders: false,
+    routes: async function () {
+      const menus = await axios.get(`https://${SERVICE_ID}.microcms.io/api/v1/menu`, {
+        headers: { 'X-API-KEY': API_KEY }
+      })
+      const sections = await axios.get(`https://${SERVICE_ID}.microcms.io/api/v1/section`, {
+        headers: { 'X-API-KEY': API_KEY }
+      })
+      var routes = ['/']
+      var pages = null
+      menus.data.contents.forEach(x => {
+        pages = sections.data.contents.filter(y => {
+          if (y.menu) {
+            return y.menu.id === x.id
+          }
+        })
+        pages = pages.map(z => {
+          return `/${x.id}/${z.id}`
+        })
+        routes = [
+          ...routes,
+          `/${x.id}`,
+          ...pages
+        ]
+      })
+      return routes
+    }
   }
 }
