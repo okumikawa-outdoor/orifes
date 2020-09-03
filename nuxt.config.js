@@ -5,6 +5,7 @@ const {
   SERVICE_ID,
   GTM_ID,
   SITE_TITLE,
+  SITE_SHORT_TITLE,
   SITE_URL, 
   SITE_DESC,
   TOP_TITLE,
@@ -178,6 +179,7 @@ export default {
   pwa: {
     manifest: {
       name: SITE_TITLE,
+      short_name: SITE_SHORT_TITLE,
       lang: 'ja'
     }
   },
