@@ -16,8 +16,9 @@
     >
       <v-img
         v-if="logo"
-        :src="logo"
+        :src="logoSrc"
         alt=""
+        class="my-4"
       ></v-img>
     
       <v-toolbar-title
@@ -107,6 +108,18 @@ export default {
       bg: this.$config.COLOR_HEADER_BG,
       title: this.$config.COLOR_HEADER_TITLE,
       menu: this.$config.COLOR_HEADER_MENU
+    }
+  },
+  computed: {
+    logoSrc () {
+      if (this.logo) {
+        if (this.$vuetify.breakpoint.mdAndUp) {
+          return this.logo + '?H=48'
+        }
+        else {
+          return this.logo + '?H=40'
+        }
+      }
     }
   }
 }
