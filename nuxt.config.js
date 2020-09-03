@@ -175,6 +175,12 @@ export default {
     hostname: SITE_URL,
     gzip: true
   },
+  pwa: {
+    manifest: {
+      name: SITE_TITLE,
+      lang: 'ja'
+    }
+  },
   generate: {
     crawler: false,
     subFolders: false,
