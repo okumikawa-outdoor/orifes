@@ -193,7 +193,7 @@ export default {
 }
 .border u {
   text-decoration:none;
-  border-bottom: dotted 5px #0C0033;
+  border-bottom: dotted 5px #110033;
   padding:1.5rem;
 }
 </style>
