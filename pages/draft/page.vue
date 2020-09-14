@@ -14,21 +14,21 @@ export default {
     })
     return { menus }
   },
-  async created() {
+  created() {
     const query = this.$route.query
     if (query.id === undefined || query.draftKey === undefined) {
       return
     }
-    const section = await this.$axios.$get(`https://${this.$config.DRAFT_SERVICE_ID}.microcms.io/api/v1/section/${query.id}?draftKey=${query.draftKey}`, {
+    this.$axios.$get(`https://${this.$config.DRAFT_SERVICE_ID}.microcms.io/api/v1/section/${query.id}?draftKey=${query.draftKey}`, {
       headers: { 'X-API-KEY': this.$config.DRAFT_API_KEY }
+    }).then(section => {
+      this.section = section
+      this.$axios.$get(`https://${this.$config.DRAFT_SERVICE_ID}.microcms.io/api/v1/menu/${section.menu.id}`, {
+        headers: { 'X-API-KEY': this.$config.DRAFT_API_KEY }
+      }).then(menu => {
+        this.menu = menu
+      })
     })
-    if (this.menus.contents[1]) {
-      this.menu = this.menus.contents.find(x => x.id === section.menu.id)
-    }
-    else {
-      this.menu = this.menus.contents[0]
-    }
-    this.section = section
   },
   data () {
     return {
