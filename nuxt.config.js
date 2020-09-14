@@ -2,7 +2,9 @@ import colors from 'vuetify/es5/util/colors'
 const axios = require("axios")
 const {
   API_KEY,
+  DRAFT_API_KEY,
   SERVICE_ID,
+  DRAFT_SERVICE_ID,
   GTM_ID,
   SITE_TITLE,
   SITE_SHORT_TITLE,
@@ -38,6 +40,8 @@ export default {
     gtm: {
       id: GTM_ID
     },
+    DRAFT_API_KEY,
+    DRAFT_SERVICE_ID,
     SITE_TITLE,
     TOP_TITLE,
     TOP_TEMPLATE,
