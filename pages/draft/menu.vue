@@ -1,37 +1,38 @@
 <template>
 <v-main :style="style">
-  <template v-if="section">
-    <Section :section="section" :menu="menu" />
-  </template>
+    <template v-if="menu && sections">
+      <List :menu="menu" :sections="sections.contents" />
+    </template>
 </v-main>
 </template>
 
 <script>
+
 export default {
   async asyncData ({ app, $config, route }) {
     const menus = await app.$axios.$get(`https://${$config.SERVICE_ID}.microcms.io/api/v1/menu`, {
       headers: { 'X-API-KEY': $config.API_KEY }
     })
-    const section = await app.$axios.$get(`https://${$config.SERVICE_ID}.microcms.io/api/v1/section/${route.params.page}`, {
-      headers: { 'X-API-KEY': $config.API_KEY }
-    })
-    const menu = menus.contents.find(x => x.id === route.params.menu)
-    return { menus, menu }
+    return { menus }
   },
   async created() {
-    const id = this.$route.params.page
     const query = this.$route.query
-    if (id === undefined || query.draftKey === undefined) {
+    if (query.id === undefined || query.draftKey === undefined) {
       return
     }
-    const section = await this.$axios.$get(`https://${this.$config.DRAFT_SERVICE_ID}.microcms.io/api/v1/section/${id}?draftKey=${query.draftKey}`, {
+    const menu = await this.$axios.$get(`https://${this.$config.DRAFT_SERVICE_ID}.microcms.io/api/v1/menu/${query.id}?draftKey=${query.draftKey}`, {
       headers: { 'X-API-KEY': this.$config.DRAFT_API_KEY }
     })
-    this.section = section;
+    const sections = await this.$axios.$get(`https://${this.$config.DRAFT_SERVICE_ID}.microcms.io/api/v1/section?filters=menu[equals]${query.id}`, {
+      headers: { 'X-API-KEY': this.$config.DRAFT_API_KEY }
+    })
+    this.menu = menu;
+    this.sections = sections
   },
   data () {
     return {
-      section: null
+      menu: null,
+      sections: null
     }
   },
   mounted () {

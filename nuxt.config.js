@@ -197,7 +197,11 @@ export default {
       const sections = await axios.get(`https://${SERVICE_ID}.microcms.io/api/v1/section`, {
         headers: { 'X-API-KEY': API_KEY }
       })
-      var routes = ['/']
+      var routes = [
+        '/',
+        'draft/menu',
+        'draft/page'
+      ]
       var pages = null
       menus.data.contents.forEach(x => {
         pages = sections.data.contents.filter(y => {
