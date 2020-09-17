@@ -4,6 +4,7 @@
     height="auto"
     cycle
     show-arrows-on-hover
+    hide-delimiters
   >
     <template v-for="item in section.item">
     <template v-if="item.bgImg">
