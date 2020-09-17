@@ -1,7 +1,7 @@
 <template>
 <div
   :class="(item.card) ? [$style[imgSize], $style[font]] : [$style[imgSize], $style[font], 'pa-3']"
-  :style="(bgImg)? `background:url('${bgImg}');background-repeat: no-repeat;background-size:cover;background-position:center;height:100%;` : `background-color: ${color.bg};height:100%;`"
+  :style="(bgImg)? `background:no-repeat center/cover url('${bgImg}');height:100%;` : `background-color: ${color.bg};height:100%;`"
 >
   <template v-if="item.content">
   <div v-html="item.content"></div>  

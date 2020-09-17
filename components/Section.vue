@@ -1,6 +1,6 @@
 <template>
 <div
-  :style="(bgImg)? `background:url('${bgImg}');background-repeat: no-repeat;background-size:cover;background-position:center;height:${height};` : `background-color: ${color.bg};height:${height}`"
+  :style="(bgImg)? `background:no-repeat center/cover url('${bgImg}');height:${height};` : `background-color: ${color.bg};height:${height}`"
 >
   <template v-if="bread && $route.params.page">
   <Bread :menu="menu" :section="section" />
@@ -92,19 +92,19 @@ export default {
   },
   methods: {
     bp (x) {
-      if (this.$vuetify.xs) {
+      if (this.$vuetify.breakpoint.xs) {
         return x.xs
       }
-      else if (this.$vuetify.sm) {
+      else if (this.$vuetify.breakpoint.sm) {
         return x.sm
       }
-      else if (this.$vuetify.md) {
+      else if (this.$vuetify.breakpoint.md) {
         return x.md
       }
-      else if (this.$vuetify.lg) {
+      else if (this.$vuetify.breakpoint.lg) {
         return x.lg
       }
-      else if (this.$vuetify.xl) {
+      else if (this.$vuetify.breakpoint.xl) {
         return x.xl
       }
     },
