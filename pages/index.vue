@@ -13,7 +13,7 @@ export default {
     const menus = await app.$axios.$get(`https://${$config.SERVICE_ID}.microcms.io/api/v1/menu`, {
       headers: { 'X-API-KEY': $config.API_KEY }
     })
-    const sections = await app.$axios.$get(`https://${$config.SERVICE_ID}.microcms.io/api/v1/section`, {
+    const sections = await app.$axios.$get(`https://${$config.SERVICE_ID}.microcms.io/api/v1/section?limit=100`, {
       headers: { 'X-API-KEY': $config.API_KEY }
     })
     const homeMenus = menus.contents.filter(x => x.display.includes('ホームコンテンツ'))

@@ -11,7 +11,7 @@ export default {
     const menus = await app.$axios.$get(`https://${$config.SERVICE_ID}.microcms.io/api/v1/menu`, {
       headers: { 'X-API-KEY': $config.API_KEY }
     })
-    const sections = await app.$axios.$get(`https://${$config.SERVICE_ID}.microcms.io/api/v1/section?filters=menu[equals]${route.params.menu}`, {
+    const sections = await app.$axios.$get(`https://${$config.SERVICE_ID}.microcms.io/api/v1/section?limit=100&filters=menu[equals]${route.params.menu}`, {
       headers: { 'X-API-KEY': $config.API_KEY }
     })
     const menu = menus.contents.find(x => x.id === route.params.menu)

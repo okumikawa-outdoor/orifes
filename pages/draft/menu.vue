@@ -23,7 +23,7 @@ export default {
     const menu = await this.$axios.$get(`https://${this.$config.DRAFT_SERVICE_ID}.microcms.io/api/v1/menu/${query.id}?draftKey=${query.draftKey}`, {
       headers: { 'X-API-KEY': this.$config.DRAFT_API_KEY }
     })
-    const sections = await this.$axios.$get(`https://${this.$config.DRAFT_SERVICE_ID}.microcms.io/api/v1/section?filters=menu[equals]${query.id}`, {
+    const sections = await this.$axios.$get(`https://${this.$config.DRAFT_SERVICE_ID}.microcms.io/api/v1/section?limit=100&filters=menu[equals]${query.id}`, {
       headers: { 'X-API-KEY': this.$config.DRAFT_API_KEY }
     })
     this.menu = menu;
