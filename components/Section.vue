@@ -45,7 +45,10 @@ export default {
             lg: 1264,
             xl: 1264
         }
-        const size = this.bp(val)
+        let size = this.bp(val)
+        if (this.sectionType === 'アイキャッチ') {
+          size = size * 1.5
+        }
         var color = this.color.bg
         if (color.includes('#')) {
           color = color.slice(1)
